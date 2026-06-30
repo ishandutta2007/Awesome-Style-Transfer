@@ -91,6 +91,19 @@ Translating style transfer logic into scalable consumer applications or cloud st
 
 ---
 
+##  Star History
+<div align="center">
+<a href="https://www.star-history.com/?repos=ishandutta2007%2FAwesome-Style-Transfer&type=date&legend=bottom-right">
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ishandutta2007/Awesome-Style-Transfer&type=date&theme=dark&legend=bottom-right" />
+<source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ishandutta2007/Awesome-Style-Transfer&type=date&legend=bottom-right" />
+<img alt="Star History Chart" src="https://api.star-history.com/chart?repos=ishandutta2007/Awesome-Style-Transfer&type=date&legend=bottom-right" />
+</picture>
+</a>
+</div>
+
+---
+
 To advance your documentation repository, context, or framework setup, consider pursuing the following development tracks:
 * Implement a **Python code block using PyTorch** to construct a functional Adaptive Instance Normalization (AdaIN) layer module from scratch.
 * Build a **comparison matrix table** explicitly analyzing Neural Optimization (Gatys), Feed-Forward Networks (Johnson), AdaIN, and Diffusion Inversion across inference latency, style diversity limits, and VRAM memory footprints.
