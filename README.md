@@ -31,22 +31,22 @@ flowchart LR
 
 Style Transfer pipelines are strictly categorized based on how style features are mathematically extracted, aligned, and matched.
 
-### A. Image-Optimized Neural Style Transfer (Instated NST)
-*   **Mechanism:** Performs active gradient descent on a target pixel grid to minimize a loss function composed of content reconstruction distance and Gram Matrix texture alignment.
-*   **Pros:** Delivers exceptional, highly customized brushstroke detail alignment for any arbitrary image pair.
-*   **Cons:** Extremely slow; unviable for real-time video serving or high-throughput production.
+- ### A. Image-Optimized Neural Style Transfer (Instated NST)
+    *   **Mechanism:** Performs active gradient descent on a target pixel grid to minimize a loss function composed of content reconstruction distance and Gram Matrix texture alignment.
+    *   **Pros:** Delivers exceptional, highly customized brushstroke detail alignment for any arbitrary image pair.
+    *   **Cons:** Extremely slow; unviable for real-time video serving or high-throughput production.
 
-### B. Adaptive Instance Normalization (AdaIN / Arbitrary Style Transfer)
-*   **Mechanism:** Normalizes the feature activations ($x$) of a content image to have zero mean and unit variance, then explicitly shifts and scales them to match the exact statistical mean ($\mu$) and standard deviation ($\sigma$) of the style image features:
-    $$\text{AdaIN}(x, y) = \sigma(y) \left( \frac{x - \mu(x)}{\sigma(x)} \right) + \mu(y)$$
-*   **Pros:** Real-time execution speed coupled with the ability to ingest *any* arbitrary style image on-the-fly without model retraining.
+-  ### B. Adaptive Instance Normalization (AdaIN / Arbitrary Style Transfer)
+    *   **Mechanism:** Normalizes the feature activations ($x$) of a content image to have zero mean and unit variance, then explicitly shifts and scales them to match the exact statistical mean ($\mu$) and standard deviation ($\sigma$) of the style image features:
+        $$\text{AdaIN}(x, y) = \sigma(y) \left( \frac{x - \mu(x)}{\sigma(x)} \right) + \mu(y)$$
+    *   **Pros:** Real-time execution speed coupled with the ability to ingest *any* arbitrary style image on-the-fly without model retraining.
 
-### C. Photorealistic Style Transfer
-*   **Mechanism:** Injects strict geometric constraints (such as a local affine transformation loss or photorealistic smoothing regularizers) into the optimization loop.
-*   **Pros:** Prevents the network from introducing abstract artistic distortions or warping edges, ensuring the stylized output retains sharp, photorealistic lighting and color consistency (ideal for day-to-night scenery shifts).
+-  ### C. Photorealistic Style Transfer
+    *   **Mechanism:** Injects strict geometric constraints (such as a local affine transformation loss or photorealistic smoothing regularizers) into the optimization loop.
+    *   **Pros:** Prevents the network from introducing abstract artistic distortions or warping edges, ensuring the stylized output retains sharp, photorealistic lighting and color consistency (ideal for day-to-night scenery shifts).
 
-### D. Text-Guided Diffusion Style Transfer (Inversion & ControlNet)
-*   **Mechanism:** Uses a text-to-image diffusion transformer backbone. It reads a content image, injects structural pose/edge boundaries via adapters like **ControlNet** or projects the image into latent noise paths (**DDIM Inversion**), denoising the matrix guided by a targeted stylistic text prompt.
+-  ### D. Text-Guided Diffusion Style Transfer (Inversion & ControlNet)
+    *   **Mechanism:** Uses a text-to-image diffusion transformer backbone. It reads a content image, injects structural pose/edge boundaries via adapters like **ControlNet** or projects the image into latent noise paths (**DDIM Inversion**), denoising the matrix guided by a targeted stylistic text prompt.
 
 ---
 
