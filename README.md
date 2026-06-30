@@ -16,14 +16,11 @@ flowchart LR
     --> C["Arbitrary Style AdaIN / Diffusion (2017+)<br/>(Text-Driven Cross-Modal Asset Generation)"]
 ```
 
-*   **The Neural Optimization Era (Gatys et al., 2015)**
-    *   *Concept:* The foundational breakthrough that birthed Neural Style Transfer (NST). Gatys et al. utilized a pre-trained image classification network (VGG-19) to decouple content from style. Content was defined as the absolute feature activations in deep layers, while style was modeled as the statistical correlations between channels (the **Gram Matrix**) across multiple layers. The system ran backpropagation directly on the *input pixels* of a blank canvas to minimize the joint loss.
-    *   *Limitation:* Catastrophically latent. Generating a single image required thousands of optimization steps via gradient descent, taking minutes or hours per canvas.
-*   **The Fast Feed-Forward Per-Style Era (Johnson et al., 2016)**
-    *   *Concept:* Resolved the latency crisis by training a dedicated **Image Transformation Network**. Instead of optimizing pixels directly for every new image, Johnson et al. trained a deep feed-forward convolutional network to execute the style mapping in a single forward pass.
-    *   *Significance:* Unlocked **real-time style transfer** (processing frames at $30\text{+ Hz}$), enabling video stream stylized rendering for the first time. However, a model was rigidly locked to exactly *one* specific style, requiring full retraining for every new artwork.
-*   **The Arbitrary Style & Generative Diffusion Era (~2017–Present)**
-    *   *Concept:* Formally established by **Adaptive Instance Normalization (AdaIN)** and scaled up by modern **Generative Diffusion / Flow Matching Models**. AdaIN decoupled style by directly matching the mean and variance of content feature channels to those of the style features. Modern variations bypass explicit style image reference cards entirely, using **Vision-Language Models (CLIP frontends)** and text-to-image diffusers to synthesize style variations natively from abstract text strings (e.g., `"in the style of cyberpunk neon cyber-noir"`).
+| Era / Milestone | Year | Key Concept & Details | Paper Link |
+| :--- | :--- | :--- | :--- |
+| **The Neural Optimization Era (Gatys et al., 2015)** | 2015 | *Concept:* The foundational breakthrough that birthed Neural Style Transfer (NST). Gatys et al. utilized a pre-trained image classification network (VGG-19) to decouple content from style. Content was defined as the absolute feature activations in deep layers, while style was modeled as the statistical correlations between channels (the **Gram Matrix**) across multiple layers. The system ran backpropagation directly on the *input pixels* of a blank canvas to minimize the joint loss.<br/><br/>*Limitation:* Catastrophically latent. Generating a single image required thousands of optimization steps via gradient descent, taking minutes or hours per canvas. | [Gatys et al., 2015](https://arxiv.org/abs/1508.06576) |
+| **The Fast Feed-Forward Per-Style Era (Johnson et al., 2016)** | 2016 | *Concept:* Resolved the latency crisis by training a dedicated **Image Transformation Network**. Instead of optimizing pixels directly for every new image, Johnson et al. trained a deep feed-forward convolutional network to execute the style mapping in a single forward pass.<br/><br/>*Significance:* Unlocked **real-time style transfer** (processing frames at $30\text{+ Hz}$), enabling video stream stylized rendering for the first time. However, a model was rigidly locked to exactly *one* specific style, requiring full retraining for every new artwork. | [Johnson et al., 2016](https://arxiv.org/abs/1603.08155) |
+| **The Arbitrary Style & Generative Diffusion Era (~2017–Present)** | 2017 | *Concept:* Formally established by **Adaptive Instance Normalization (AdaIN)** and scaled up by modern **Generative Diffusion / Flow Matching Models**. AdaIN decoupled style by directly matching the mean and variance of content feature channels to those of the style features. Modern variations bypass explicit style image reference cards entirely, using **Vision-Language Models (CLIP frontends)** and text-to-image diffusers to synthesize style variations natively from abstract text strings (e.g., `"in the style of cyberpunk neon cyber-noir"`). | [Huang & Belongie, 2017](https://arxiv.org/abs/1703.06868) |
 
 ---
 
@@ -31,22 +28,12 @@ flowchart LR
 
 Style Transfer pipelines are strictly categorized based on how style features are mathematically extracted, aligned, and matched.
 
-- ### A. Image-Optimized Neural Style Transfer (Instated NST)
-    *   **Mechanism:** Performs active gradient descent on a target pixel grid to minimize a loss function composed of content reconstruction distance and Gram Matrix texture alignment.
-    *   **Pros:** Delivers exceptional, highly customized brushstroke detail alignment for any arbitrary image pair.
-    *   **Cons:** Extremely slow; unviable for real-time video serving or high-throughput production.
-
--  ### B. Adaptive Instance Normalization (AdaIN / Arbitrary Style Transfer)
-    *   **Mechanism:** Normalizes the feature activations ($x$) of a content image to have zero mean and unit variance, then explicitly shifts and scales them to match the exact statistical mean ($\mu$) and standard deviation ($\sigma$) of the style image features:
-        $$\text{AdaIN}(x, y) = \sigma(y) \left( \frac{x - \mu(x)}{\sigma(x)} \right) + \mu(y)$$
-    *   **Pros:** Real-time execution speed coupled with the ability to ingest *any* arbitrary style image on-the-fly without model retraining.
-
--  ### C. Photorealistic Style Transfer
-    *   **Mechanism:** Injects strict geometric constraints (such as a local affine transformation loss or photorealistic smoothing regularizers) into the optimization loop.
-    *   **Pros:** Prevents the network from introducing abstract artistic distortions or warping edges, ensuring the stylized output retains sharp, photorealistic lighting and color consistency (ideal for day-to-night scenery shifts).
-
--  ### D. Text-Guided Diffusion Style Transfer (Inversion & ControlNet)
-    *   **Mechanism:** Uses a text-to-image diffusion transformer backbone. It reads a content image, injects structural pose/edge boundaries via adapters like **ControlNet** or projects the image into latent noise paths (**DDIM Inversion**), denoising the matrix guided by a targeted stylistic text prompt.
+| Variant | Year | Mechanism & Details | Paper Link |
+| :--- | :--- | :--- | :--- |
+| **A. Image-Optimized Neural Style Transfer (Instated NST)** | 2015 | **Mechanism:** Performs active gradient descent on a target pixel grid to minimize a loss function composed of content reconstruction distance and Gram Matrix texture alignment.<br/><br/>**Pros:** Delivers exceptional, highly customized brushstroke detail alignment for any arbitrary image pair.<br/><br/>**Cons:** Extremely slow; unviable for real-time video serving or high-throughput production. | [Gatys et al., 2015](https://arxiv.org/abs/1508.06576) |
+| **B. Adaptive Instance Normalization (AdaIN / Arbitrary Style Transfer)** | 2017 | **Mechanism:** Normalizes the feature activations ($x$) of a content image to have zero mean and unit variance, then explicitly shifts and scales them to match the exact statistical mean ($\mu$) and standard deviation ($\sigma$) of the style image features:<br/>$$\text{AdaIN}(x, y) = \sigma(y) \left( \frac{x - \mu(x)}{\sigma(x)} \right) + \mu(y)$$<br/><br/>**Pros:** Real-time execution speed coupled with the ability to ingest *any* arbitrary style image on-the-fly without model retraining. | [Huang & Belongie, 2017](https://arxiv.org/abs/1703.06868) |
+| **C. Photorealistic Style Transfer** | 2017 | **Mechanism:** Injects strict geometric constraints (such as a local affine transformation loss or photorealistic smoothing regularizers) into the optimization loop.<br/><br/>**Pros:** Prevents the network from introducing abstract artistic distortions or warping edges, ensuring the stylized output retains sharp, photorealistic lighting and color consistency (ideal for day-to-night scenery shifts). | [Luan et al., 2017](https://arxiv.org/abs/1703.07511) |
+| **D. Text-Guided Diffusion Style Transfer (Inversion & ControlNet)** | 2023 | **Mechanism:** Uses a text-to-image diffusion transformer backbone. It reads a content image, injects structural pose/edge boundaries via adapters like **ControlNet** or projects the image into latent noise paths (**DDIM Inversion**), denoising the matrix guided by a targeted stylistic text prompt. | [Zhang et al., 2023](https://arxiv.org/abs/2307.00657) |
 
 ---
 
@@ -54,16 +41,11 @@ Style Transfer pipelines are strictly categorized based on how style features ar
 
 Depending on the operational constraints of the creative or industrial pipeline, style networks are configured to process distinct visual structures.
 
-*   **2D Artistic Style Transfer**
-    *   *Input Domain:* Static 2D graphics, digital photography, or interface layouts.
-    *   *Focus:* Grounding global brushstroke textures, impasto oil layering, canvas grains, and local color palette values over flat image components.
-*   **Temporal Video Style Transfer**
-    *   *Input Domain:* Continuous, multi-frame video clips or live camera streams.
-    *   *The Hurdle:* Applying naive frame-by-frame style transfer causes severe **temporal flickering glitches**, as the stochastic texture calculations shift randomly between frames.
-    *   *Mitigation:* Integrating explicit **Optical Flow loss functions** or cross-frame temporal self-attention masks to lock down pixel consistency across sequential time-steps.
-*   **3D Mesh & Volumetric Scene Stylization**
-    *   *Input Domain:* 3D object vertices, NeRF (Neural Radiance Fields), or 3D Gaussian Splatting point clouds.
-    *   *Focus:* Enforces viewpoint consistency, ensuring that as a virtual camera moves around a 3D asset, the stylized painting textures remain rigidly fixed to the object's spatial coordinates rather than warping on screen.
+| Modality / Task | Year | Input Domain & Key Focus / Hurdle / Mitigation | Paper Link |
+| :--- | :--- | :--- | :--- |
+| **2D Artistic Style Transfer** | 2015 | *Input Domain:* Static 2D graphics, digital photography, or interface layouts.<br/><br/>*Focus:* Grounding global brushstroke textures, impasto oil layering, canvas grains, and local color palette values over flat image components. | [Gatys et al., 2015](https://arxiv.org/abs/1508.06576) |
+| **Temporal Video Style Transfer** | 2016 | *Input Domain:* Continuous, multi-frame video clips or live camera streams.<br/><br/>*The Hurdle:* Applying naive frame-by-frame style transfer causes severe **temporal flickering glitches**, as the stochastic texture calculations shift randomly between frames.<br/><br/>*Mitigation:* Integrating explicit **Optical Flow loss functions** or cross-frame temporal self-attention masks to lock down pixel consistency across sequential time-steps. | [Ruder et al., 2016](https://arxiv.org/abs/1604.08610) |
+| **3D Mesh & Volumetric Scene Stylization** | 2018 | *Input Domain:* 3D object vertices, NeRF (Neural Radiance Fields), or 3D Gaussian Splatting point clouds.<br/><br/>*Focus:* Enforces viewpoint consistency, ensuring that as a virtual camera moves around a 3D asset, the stylized painting textures remain rigidly fixed to the object's spatial coordinates rather than warping on screen. | [Kato et al., 2018](https://arxiv.org/abs/1711.07569) |
 
 ---
 
@@ -71,23 +53,20 @@ Depending on the operational constraints of the creative or industrial pipeline,
 
 Translating style transfer logic into scalable consumer applications or cloud streaming engines introduces critical computing bottlenecks.
 
-*   **The Outlier Blur and Feature Demolition Glitch**
-    *   *The Problem:* Forcing a model to prioritize style statistics over everything else can over-correct hidden layers, causing the network to blur out fine structural details (such as facial expressions, license plate lettering, or low-level edges), rendering the semantic content unreadable.
-    *   *Mitigation:* Deploying **WCT+ (Whitening and Coloring Transforms)** or feature-preserving skip-connections that inject sharp, high-resolution edge grids straight from early encoder layers into the terminal decoding blocks.
-*   **The Real-Time HBM Caching Bottleneck**
-    *   *The Problem:* Processing high-resolution video style transfer requires writing massive multi-channel activation tensors out to slow High Bandwidth Memory (HBM) repeatedly, saturating the memory bus and dropping frames.
-    *   *Mitigation:* Compiling transformation pipelines into **Fused Triton or CUDA kernels** that execute normalization, scaling adjustments, and channel conversions entirely within fast on-chip GPU SRAM registers.
+| Challenge | Year | Problem Description & Mitigation | Paper Link |
+| :--- | :--- | :--- | :--- |
+| **The Outlier Blur and Feature Demolition Glitch** | 2017 | *The Problem:* Forcing a model to prioritize style statistics over everything else can over-correct hidden layers, causing the network to blur out fine structural details (such as facial expressions, license plate lettering, or low-level edges), rendering the semantic content unreadable.<br/><br/>*Mitigation:* Deploying **WCT+ (Whitening and Coloring Transforms)** or feature-preserving skip-connections that inject sharp, high-resolution edge grids straight from early encoder layers into the terminal decoding blocks. | [Li et al., 2017](https://arxiv.org/abs/1705.08086) |
+| **The Real-Time HBM Caching Bottleneck** | 2019 | *The Problem:* Processing high-resolution video style transfer requires writing massive multi-channel activation tensors out to slow High Bandwidth Memory (HBM) repeatedly, saturating the memory bus and dropping frames.<br/><br/>*Mitigation:* Compiling transformation pipelines into **Fused Triton or CUDA kernels** that execute normalization, scaling adjustments, and channel conversions entirely within fast on-chip GPU SRAM registers. | [Tillet et al., 2019](https://dl.acm.org/doi/10.1145/3358960.3358962) |
 
 ---
 
 ## 5. Frontier Real-World AI Applications
 
-*   **Entertainment, Cinema, & Gaming Pre-Visualization Production**
-    *   *Application:* Film studios apply temporal video style transfer to entire live-action sequences, automatically rendering frames to match custom hand-drawn animation styles (cel-shading) or graphic novel aesthetics without manual rotoscaping loops.
-*   **Digital Creative Marketing & E-Commerce Asset Adaptation**
-    *   *Application:* Generative design platforms optimize commercial assets. Marketing teams pass baseline product photography through style conversion arrays, instantly transforming background environments to match seasonal aesthetic palettes (e.g., watercolor spring patterns or minimalist winter tones) dynamically for ad campaigns.
-*   **Sim-to-Real Data Augmentation for Autonomous Safety Training**
-    *   *Application:* Trains computer vision classifiers for autonomous vehicles or robotics. When physical real-world data lacks environmental variation, photorealistic style transfer takes pristine sunny driving clips and stylizes them into rainy, snowy, or heavy-glare scenarios, multiplying the training data matrix robustly.
+| Application Field | Year | Real-World Application Details | Paper Link |
+| :--- | :--- | :--- | :--- |
+| **Entertainment, Cinema, & Gaming Pre-Visualization Production** | 2016 | *Application:* Film studios apply temporal video style transfer to entire live-action sequences, automatically rendering frames to match custom hand-drawn animation styles (cel-shading) or graphic novel aesthetics without manual rotoscaping loops. | [Ruder et al., 2016](https://arxiv.org/abs/1604.08610) |
+| **Digital Creative Marketing & E-Commerce Asset Adaptation** | 2017 | *Application:* Generative design platforms optimize commercial assets. Marketing teams pass baseline product photography through style conversion arrays, instantly transforming background environments to match seasonal aesthetic palettes (e.g., watercolor spring patterns or minimalist winter tones) dynamically for ad campaigns. | [Hsiao et al., 2017](https://arxiv.org/abs/1706.01805) |
+| **Sim-to-Real Data Augmentation for Autonomous Safety Training** | 2020 | *Application:* Trains computer vision classifiers for autonomous vehicles or robotics. When physical real-world data lacks environmental variation, photorealistic style transfer takes pristine sunny driving clips and stylizes them into rainy, snowy, or heavy-glare scenarios, multiplying the training data matrix robustly. | [Tech Science Press, 2020](https://www.techscience.com/iasc/v26n4/39719) |
 
 ---
 
