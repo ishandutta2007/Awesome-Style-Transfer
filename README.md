@@ -9,7 +9,7 @@ Style Transfer is a dynamic computer vision paradigm that blends the artistic st
 
 The technical approach to artistic style transfer has shifted from slow pixel-optimization matching to fast feed-forward networks, normalized channel stats, and open-vocabulary generative frameworks.
 
-```
+```mermaid
 [Iterative Optimization (Gatys, 2015)] ----> [Fast Feed-Forward (Johnson, 2016)] ----> [Arbitrary Style Adain / Diffusion (2017+)](Multi-Hour Per-Image Backprop)                (Per-Style Real-Time Networks)                (Text-Driven Cross-Modal Asset Generation)
 ```
 
