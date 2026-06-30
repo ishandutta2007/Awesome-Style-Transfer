@@ -1,8 +1,14 @@
 # 🎨 Awesome-Style-Transfer
 
+<meta name="description" content="A curated list of awesome neural style transfer papers, variants, modalities, and applications. From Gatys' neural optimization to text-guided diffusion.">
+<meta name="keywords" content="style transfer, neural style transfer, deep learning, artificial intelligence, computer vision, AdaIN, Gatys, diffusion models, ControlNet">
+
 <div align="center">
   <img src="assets/banner.svg" alt="Awesome Style Transfer Banner" width="100%" />
+  <br/><br/>
+  <a href="https://github.com/ishandutta2007/Awesome-Awesome-Awesome"><img src="https://img.shields.io/badge/Awesome-%E2%9C%94-blueviolet?style=flat-square&logo=github" alt="Awesome"/></a><a href="https://discord.gg/jc4xtF58Ve"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
 </div>
+
 
 ## 🚀 Style Transfer in AI: History, Progression, Variants, & Applications
 
