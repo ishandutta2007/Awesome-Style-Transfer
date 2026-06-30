@@ -1,11 +1,16 @@
-# Awesome-Style-Transfer
-## Style Transfer in AI: History, Progression, Variants, & Applications
+# 🎨 Awesome-Style-Transfer
+
+<div align="center">
+  <img src="assets/banner.svg" alt="Awesome Style Transfer Banner" width="100%" />
+</div>
+
+## 🚀 Style Transfer in AI: History, Progression, Variants, & Applications
 
 Style Transfer is a dynamic computer vision paradigm that blends the artistic style of a source image (the *Style Image*, such as a painting by Van Gogh) with the structural components of a target image (the *Content Image*, such as a cityscape photograph). The resulting synthesis preserves the recognizable semantic layout of the content while rendering it with the brushstrokes, color palettes, and textures of the artwork. Over its evolution in AI, style transfer has transformed from slow, optimization-based iterative math to real-time feed-forward deep convolutional layers, arbitrary multi-style networks, and modern text-guided diffusion models.
 
 ---
 
-## 1. The Macro Chronological Evolution
+## 📅 1. The Macro Chronological Evolution
 
 The technical approach to artistic style transfer has shifted from slow pixel-optimization matching to fast feed-forward networks, normalized channel stats, and open-vocabulary generative frameworks.
 
@@ -24,7 +29,7 @@ flowchart LR
 
 ---
 
-## 2. Core Functional & Algorithmic Variants
+## 🛠️ 2. Core Functional & Algorithmic Variants
 
 Style Transfer pipelines are strictly categorized based on how style features are mathematically extracted, aligned, and matched.
 
@@ -37,7 +42,7 @@ Style Transfer pipelines are strictly categorized based on how style features ar
 
 ---
 
-## 3. Structural Task & Modality Types
+## 📐 3. Structural Task & Modality Types
 
 Depending on the operational constraints of the creative or industrial pipeline, style networks are configured to process distinct visual structures.
 
@@ -49,7 +54,7 @@ Depending on the operational constraints of the creative or industrial pipeline,
 
 ---
 
-## 4. Production Engineering Challenges & Hardware Solutions
+## ⚡ 4. Production Engineering Challenges & Hardware Solutions
 
 Translating style transfer logic into scalable consumer applications or cloud streaming engines introduces critical computing bottlenecks.
 
@@ -60,7 +65,7 @@ Translating style transfer logic into scalable consumer applications or cloud st
 
 ---
 
-## 5. Frontier Real-World AI Applications
+## 🌟 5. Frontier Real-World AI Applications
 
 | Application Field | Year | Real-World Application Details | Paper Link |
 | :--- | :--- | :--- | :--- |
@@ -70,9 +75,9 @@ Translating style transfer logic into scalable consumer applications or cloud st
 
 ---
 
-## References
+## 📚 References
 1. Gatys, L. A., Ecker, A. S., & Bethge, M. (2015). A neural algorithm of artistic style. *arXiv preprint arXiv:1508.06576*.
-2. Johnson, J., Alahi, A., & Fei-Fei, L. (2016). Perceptual losses for real-time style transfer and super-resolution. *European Conference on Computer Vision (ECCV)*, 694-876.
+2. Johnson, J., Alahi, A., & Fei-Fei, L. (2016). Perceptual losses for real-time style transfer and super-resolution. *European Conference on Church Vision (ECCV)*, 694-876.
 3. Huang, X., & Belongie, S. (2017). Arbitrary style transfer in real-time with adaptive instance normalization. *Proceedings of the IEEE International Conference on Computer Vision (ICCV)*, 1501-1510.
 4. Luan, Fujun, et al. (2017). Deep photo style transfer. *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)*, 4990-4998.
 5. Zhang, D., & Wang, M. (2020). Video style transfer with tucker decomposition and temporal consistency regularizer. *IEEE Transactions on Image Processing*, 29, 4419-4432.
